@@ -1,0 +1,27 @@
+from typing import List
+
+
+class Solution:
+    def makePalindrome(self, n : int, arr : List[str]) -> bool:
+        d = {}
+        for i in arr:
+            d[i] = d.get(i, 0) + 1
+        mid = ""
+        for i in d:
+            rev = i[::-1]
+            if i == rev:
+                if d[i] % 2 == 1:
+                    if mid:
+                        return False
+                    mid = i
+            else:
+                if d[i] != d.get(rev, 0):
+                    if mid:
+                        return False
+                    mid = i
+        palin = ""
+        for s in d:
+            palin += s * (d[s] // 2)
+        palin = palin + mid + palin[::-1]
+        return palin == palin[::-1]
+
