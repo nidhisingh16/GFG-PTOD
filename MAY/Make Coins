@@ -1,0 +1,21 @@
+from bisect import bisect_left
+
+
+class Solution:
+    def maxCoins(self,n,ranges):
+        ranges.sort(key=lambda x:(x[1],x[0]))
+        d={}
+        d[-1]=0
+        ans=0
+        prev=0
+        t=[-1]
+        for i in range(n):
+            ans=max(ans,ranges[i][2])
+            sus=bisect_left(t,ranges[i][0])
+            if sus>=len(t) or ranges[i][0]<t[sus]:
+                sus-=1
+            ans=max(ans,ranges[i][2]+d[t[sus]])
+            d[ranges[i][1]]=max(prev,ranges[i][2])
+            t.append(ranges[i][1])
+            prev=max(prev,ranges[i][2])
+        return ans
