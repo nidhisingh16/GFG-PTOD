@@ -1,0 +1,16 @@
+class Solution:
+    def goodSubtrees(self,root,k):
+        ans=0
+        def solve(root):
+            nonlocal ans
+            if not root:
+                return set()
+            temp=set()
+            temp.add(root.data)
+            temp|=solve(root.left)
+            temp|=solve(root.right)
+            if len(temp)<=k:
+                ans+=1
+            return temp
+        solve(root)
+        return ans
