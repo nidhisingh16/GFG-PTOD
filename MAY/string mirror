@@ -1,0 +1,22 @@
+class Solution:
+    def stringMirror(self, str):
+        lst=str[0]
+        tmp=str[0]
+        for i in range(1,len(str)):
+            if str[i]<lst:
+                last=str[i]
+                tmp+=lst
+            else:
+                break
+        ans1=tmp
+        ans1+=tmp[::-1]
+        tmp=str[0]
+        lst=tmp
+        for i in range(1,len(str)):
+            if str[i]<=lst:
+                lst=str[i]
+                tmp+=lst
+            else:
+                break
+        ans2=tmp+tmp[::-1]
+        return min(ans1,ans2)
