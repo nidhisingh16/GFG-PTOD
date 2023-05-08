@@ -1,0 +1,15 @@
+class Solution():
+    def modulo(self, s, m):
+        n = len(s)
+        s = s[::-1]
+        res = 0
+        p = [0]*n
+        p[0] = 1
+        tmp =0
+        for i in range(1, n):
+            p[i] = (2*p[i-1])%m
+        for i in range(n):
+            if s[i] == "1":
+                tmp += p[i]
+            tmp%=m
+        return tmp
