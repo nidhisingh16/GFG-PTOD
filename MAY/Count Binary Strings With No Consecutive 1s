@@ -1,0 +1,41 @@
+mod = 10**9+7
+class Solution :
+    def multiply(self, a, b) :
+
+        mul=[[0 for j in range(3)] for j in range(3)]
+
+        for i in range(3):
+            for j in range(3):
+                for k in range(3):
+                    temp = (a[i][k] * b[k][j]) % mod
+                    mul[i][j] += temp
+                    mul[i][j] %= mod
+            
+        for i in range(3): 
+            for j in range(3): 
+                a[i][j]=mul[i][j]
+
+    def power(self, mat, N) :
+        M = [[1, 1, 0], [1, 0, 0], [0, 1, 0]];
+
+        if (N == 1) :
+            return (mat[0][0] + mat[0][1]) % mod
+
+        self.power(mat, N // 2)
+
+        self.multiply(mat, mat)
+
+        if (N % 2 != 0) :
+            self.multiply(mat, M)
+
+        return (mat[0][0] + mat[0][1]) % mod
+
+    def countStrings(self, N) :
+
+        mat = [[1, 1, 0], [1, 0, 0], [0, 1, 0]]
+        if (N == 2) :
+            return 3
+        if (N == 1) :
+            return 2
+
+        return self.power(mat, N)
