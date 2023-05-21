@@ -1,0 +1,6 @@
+
+class Solution:
+    def findMoves(self, n,chairs, passengers) -> int:
+        chairs.sort()
+        passengers.sort()
+        return sum(abs(e - t) for e, t in zip(chairs, passengers))
