@@ -1,0 +1,29 @@
+
+class Node:
+    def __init__(self, val):
+        self.right = None
+        self.data = val
+        self.left = None
+        
+class Solution:
+    def constructBinaryTreeUtil(self, pre, preM, preIndex, l, h, size):
+        if (preIndex >= size or l > h):
+            return None , preIndex
+        root = Node(pre[preIndex])
+        preIndex += 1
+        if (l == h):
+            return root, preIndex
+        i = 0
+        for i in range(l, h + 1):
+            if (pre[preIndex] == preM[i]):
+                break
+        if (i <= h):
+            root.left, preIndex = self.constructBinaryTreeUtil(pre, preM, preIndex, i, h, size)
+            root.right, preIndex = self.constructBinaryTreeUtil(pre, preM, preIndex, l + 1, i - 1, size)
+        return root, preIndex
+
+
+    def constructBinaryTree(self, pre, preMirror, size):
+        preIndex = 0
+        root, x = self.constructBinaryTreeUtil(pre, preMirror, preIndex,0, size - 1, size)
+        return root
