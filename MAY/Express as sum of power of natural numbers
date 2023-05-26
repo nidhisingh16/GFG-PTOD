@@ -1,0 +1,11 @@
+class Solution:
+    def numOfWays(self, n, x):
+        dp = [0] * (n + 1)
+        dp[0] = 1
+        MOD = int(1e9 + 7)
+        for i in range(1, n + 1):
+            for j in range(n, i - 1, -1):
+                y = i ** x
+                if j >= y:
+                    dp[j] = (dp[j] + dp[j - y]) % MOD
+        return dp[n]
