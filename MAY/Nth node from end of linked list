@@ -1,0 +1,16 @@
+def getNthFromLast(head,n):
+
+    curr_node = head
+    nth_node = head
+
+    while n :
+        if n and curr_node == None:
+            return -1
+        curr_node = curr_node.next
+        n-=1
+
+    while curr_node :
+        curr_node = curr_node.next
+        nth_node = nth_node.next
+
+    return nth_node.data
